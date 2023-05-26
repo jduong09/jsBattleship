@@ -1,36 +1,38 @@
 const Gameboard = () => {
-  const _board = new Array(11).fill(new Array(11).fill([]));
+  const _board = Array.from({length: 11}, () => Array(11).fill(''));
   const _ships = {};
 
   function insert(shipObj, start, end) {
-    _ships[shipObj.name] = shipObj;
     let shipLength = shipObj.shipLength;
-    // If the insert parameters are correct, then we can insert the ship into the board.
     if (checkInsertParameters(shipLength, start, end)) {
       _ships[shipObj.name] = shipObj;
       let dx = start[0] - end[0];
       let dy = start[1] - end[1];
-
-      _board[start[0], start[1]] = shipObj.name;
-
+      _board[start[1]][start[0]] = shipObj.name;
       if (dx) {
+        let xMarker = start[0];
         while (dx) {
           if (dx > 0) {
-            _board[start[0] + 1, start[1]] = shipObj.name;
+            _board[start[1]][xMarker - 1] = shipObj.name;
+            xMarker -= 1;
             dx -= 1;
           } else {
-            _board[start[0] - 1, start[1]] = shipObj.name;
+            _board[start[1]][xMarker + 1] = shipObj.name;
+            xMarker += 1
             dx += 1;
           }
         }
       } else {
+        let yMarker = start[1];
         while (dy) {
           if (dy > 0) {
-            _board[start[0], start[1] - 1] = shipObj.name;
-            dx -= 1;
+            _board[yMarker - 1][start[0]] = shipObj.name;
+            yMarker -= 1;
+            dy -= 1;
           } else {
-            _board[start[0 - 1], start[1] + 1] = shipObj.name;
-            dx += 1;
+            _board[yMarker + 1][start[0]] = shipObj.name;
+            yMarker += 1;
+            dy += 1;
           }
         }
       }
@@ -41,7 +43,14 @@ const Gameboard = () => {
   }
 
   function receiveAttack(coord) {
-
+    const boardlocation = _board[coord[1]][coord[0]];
+    if (boardlocation) {
+      const ship = _ships[boardlocation];
+      ship.hit();
+      return 'Shit Hit';
+    } else {
+      return coord;
+    }
   }
 
   return {
