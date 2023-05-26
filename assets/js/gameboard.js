@@ -1,6 +1,7 @@
 const Gameboard = () => {
   const _board = Array.from({length: 11}, () => Array(11).fill(''));
   const _ships = {};
+  const _missedAttacks = [];
 
   function insert(shipObj, start, end) {
     let shipLength = shipObj.shipLength;
@@ -49,15 +50,28 @@ const Gameboard = () => {
       ship.hit();
       return 'Shit Hit';
     } else {
+      _missedAttacks.push(coord);
       return coord;
     }
   }
 
+  function gameOver() {
+    for (const shipName in _ships) {
+      const ship = _ships[shipName];
+      if (ship.isSunk()) return false;
+    }
+    return true;
+  }
+
+
+
   return {
     _board,
     _ships,
+    _missedAttacks,
     insert,
     receiveAttack,
+    gameOver
   }
 }
 

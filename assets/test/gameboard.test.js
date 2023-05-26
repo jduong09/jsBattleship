@@ -95,7 +95,7 @@ describe('receiveAttack function', () => {
     expect(cruiser.isSunk()).toBeTruthy();
   });
 
-  test.only('records coordinates if attack misses ships', () => {
+  test('records coordinates if attack misses ships', () => {
     const cruiser = Ship('Cruiser', 4);
     const gameboard = gameboardFns.Gameboard();
     gameboard.insert(cruiser, [0, 0], [3, 0]);
@@ -104,9 +104,36 @@ describe('receiveAttack function', () => {
 });
 
 test('Gameboard should keep track of missed attacks so they can display them properly', () => {
-
+  const expected = [[4, 0]];
+  const cruiser = Ship('Cruiser', 4);
+  const gameboard = gameboardFns.Gameboard();
+  gameboard.insert(cruiser, [0, 0], [3, 0]);
+  // Send missed attack
+  gameboard.receiveAttack([4, 0]);
+  expect(gameboard._missedAttacks).toEqual(expect.arrayContaining(expected));
 });
 
 test('Gameboard should be able to report whether or not all of the ships have been sunk', () => {
+  const cruiser = Ship('Cruiser', 4);
+  const airCarrier = Ship('Air Carrier', 7);
+  const gameboard = gameboardFns.Gameboard();
+  gameboard.insert(cruiser, [0, 0], [3, 0]);
+  gameboard.insert(airCarrier, [11, 0], [5, 0]);
 
+  // Destroy Cruiser
+  gameboard.receiveAttack([0, 0]);
+  gameboard.receiveAttack([1, 0]);
+  gameboard.receiveAttack([2, 0]);
+  gameboard.receiveAttack([3, 0]);
+
+  // Destroy Air Carrier
+  gameboard.receiveAttack([11, 0]);
+  gameboard.receiveAttack([10, 0]);
+  gameboard.receiveAttack([9, 0]);
+  gameboard.receiveAttack([8, 0]);
+  gameboard.receiveAttack([7, 0]);
+  gameboard.receiveAttack([6, 0]);
+  gameboard.receiveAttack([5, 0]);
+
+  expect(gameboard.gameOver).toBeTruthy();
 });
