@@ -83,7 +83,14 @@ describe('Gameboard should place ships at specific coordinates by calling the sh
     expect(gameboard._board[4][0]).toBe('');
     expect(gameboard._board[4][1]).toBe('');
   });
-})
+
+  test('Inserting ship at area where another ship is inserted should result in no insertion', () => {
+    const cruiser = Ship('Cruiser', 3);
+    const gameboard = gameboardFns.Gameboard();
+    gameboard.insert(cruiser, [0, 2], [0, 0]);
+    expect(() => gameboard.validateInsert([0, 2], [0, 5])).toThrow('Invalid Insert');
+  });
+});
 
 // Gameboards should have a receiveAttack function that takes a pair of coordinates, determines whether ot not the attack hit a ship and then sends the hit function to the correct ship, or records the coordinates of the missed shot.
 describe('receiveAttack function', () => {

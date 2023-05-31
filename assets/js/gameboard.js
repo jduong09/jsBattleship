@@ -3,6 +3,27 @@ const Gameboard = () => {
   const _ships = {};
   const _missedAttacks = [];
 
+  function validateInsert(start, end) {
+    let marker = start;
+    if (start[0] === 0) {
+
+      while (marker[1] !== end[1]) {
+        if (_board[marker[1]][marker[0]] !== '') {
+          throw new Error('Invalid Insert');
+        }
+        marker = [start[0], marker[1] + 1];
+      }
+    } else {
+      while (marker[0] !== end[0]) {
+        if (_board[marker[1]][marker[0]] !== '') {
+          throw new Error('Invalid Insert');
+        }
+        marker = [marker[0] + 1, start[1]];
+      }
+    }
+    return true;
+  }
+
   function insert(shipObj, start, end) {
     let shipLength = shipObj.shipLength;
     if (checkInsertParameters(shipLength, start, end)) {
@@ -69,6 +90,7 @@ const Gameboard = () => {
     _board,
     _ships,
     _missedAttacks,
+    validateInsert,
     insert,
     receiveAttack,
     gameOver

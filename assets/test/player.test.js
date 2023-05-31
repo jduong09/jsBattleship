@@ -1,1 +1,0 @@
-// Players can take turns playing the game by attacking the enemy Gameboard.
