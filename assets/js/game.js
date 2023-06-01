@@ -5,12 +5,19 @@ const Game = () => {
   const _players = {};
 
   function createPlayer(playerName) {
-    _players[playerName] = {
+    const playerNumber = _players[1] ? 2 : 1;
+
+    _players[playerNumber] = {
       name: playerName,
       board: gameboardFns.Gameboard()
-    };
+    }
+   
+    const cruiser = Ship('Cruiser', 3);
+    const destroyer = Ship('Destroyer', 2);
+    _players[playerNumber].board.insert(cruiser, [0, 0], [0, 2]);
+    _players[playerNumber].board.insert(destroyer, [1, 0], [2, 0]);
 
-    return _players[playerName];
+    return _players[playerNumber];
   }
 
   return {
@@ -39,5 +46,10 @@ const createRandomBoard = () => {
   }
 }
 */
+
+const newGame = Game();
+newGame.createPlayer('Justin');
+newGame.createPlayer('Jeff');
+console.log(newGame);
 
 module.exports = Game;
