@@ -1,5 +1,5 @@
 const Gameboard = () => {
-  const _board = Array.from({length: 11}, () => Array(11).fill(''));
+  const _board = Array.from({length: 10}, () => Array(10).fill(''));
   const _ships = {};
   const _missedAttacks = [];
 

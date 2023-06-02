@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../src/css/meyers_reset.css">
+  <link rel="stylesheet" type="text/css" href="../src/css/styles.css">
+  <script type="text/javascript" src="main.js"></script>
+  <title>BattleShip</title>
+</head>
+<body>
+  <main>
+    <div class="board" data-player="1">
+      <ul class="list-rows">
+        <li class="row">
+          <span class="spot"></span>
+          <span class="spot">A</span>
+          <span class="spot">B</span>
+          <span class="spot">C</span>
+          <span class="spot">D</span>
+          <span class="spot">E</span>
+          <span class="spot">F</span>
+          <span class="spot">G</span>
+          <span class="spot">H</span>
+          <span class="spot">I</span>
+          <span class="spot">K</span>
+        </li>
+        <li class="row">
+          <span class="spot">1</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">2</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">3</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">4</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">5</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">6</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">7</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">8</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">9</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">10</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="board" data-player="2">
+      <ul class="list-rows">
+        <li class="row">
+          <span class="spot"></span>
+          <span class="spot">A</span>
+          <span class="spot">B</span>
+          <span class="spot">C</span>
+          <span class="spot">D</span>
+          <span class="spot">E</span>
+          <span class="spot">F</span>
+          <span class="spot">G</span>
+          <span class="spot">H</span>
+          <span class="spot">I</span>
+          <span class="spot">K</span>
+        </li>
+        <li class="row">
+          <span class="spot">1</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">2</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">3</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">4</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">5</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">6</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">7</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">8</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">9</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+        <li class="row">
+          <span class="spot">10</span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+          <span class="spot"></span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 id="game-message">hello.</h2>
+      <form>
+        <label for="coord"></label>
+        <input type="text" id="coord" placeholder="ex: A4" />
+        <input type="submit" id="submit" value="Submit Coordinates" />
+      </form>
+    </div>
+  </main>
+</body>
+</html>

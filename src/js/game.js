@@ -20,6 +20,13 @@ const Game = () => {
     return _players[playerNumber];
   }
 
+  function setPlayerBoard(playerNumber) {
+    const ships = [['Battleship', 4], ['Cruiser', 3]];
+    for (let i = 0; i < ships.length; i++) {
+
+    }
+  }
+
   return {
     _players,
     createPlayer
