@@ -1,3 +1,7 @@
+.hide {
+  display: none !important;
+}
+
 .board {
   padding: 1rem;
 }
@@ -22,4 +26,10 @@
   width: 24px;
   height: 24px;
   border: .5px solid black;
+}
+
+.span-input-error {
+  display: block;
+  color: red;
+  font-size: .85rem;
 }

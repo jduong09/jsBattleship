@@ -6,7 +6,6 @@ const Gameboard = () => {
   function validateInsert(start, end) {
     let marker = start;
     if (start[0] === 0) {
-
       while (marker[1] !== end[1]) {
         if (_board[marker[1]][marker[0]] !== '') {
           throw new Error('Invalid Insert');

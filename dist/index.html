@@ -306,8 +306,15 @@
       </ul>
     </div>
     <div>
-      <h2 id="game-message">hello.</h2>
-      <form>
+      <h2 id="game-message">Preparation Phase</h2>
+      <form id="form-insert-ships">
+        <div id="div-insert" data-ship="cruiser">Player 1, choose where to place your cruiser (Length: 3 places):</div>
+        <label>Coordinates:</label>
+        <input type="text" id="insert-coordinates" placeholder="ex: A4 A6, B3 B6" />
+        <span id="span-insert-error" class="span-input-error hide"></span>
+        <input type="submit" id="insert-submit" value="Submit Coordinates" />
+      </form>
+      <form id="form-atk-coords" class="hide">
         <label for="coord"></label>
         <input type="text" id="coord" placeholder="ex: A4" />
         <input type="submit" id="submit" value="Submit Coordinates" />
