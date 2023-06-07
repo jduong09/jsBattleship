@@ -3,6 +3,7 @@ const Gameboard = () => {
   const _ships = {};
   const _missedAttacks = [];
 
+  // incorrect.
   function validateInsert(start, end) {
     let marker = start;
     if (start[0] === 0) {
@@ -29,31 +30,32 @@ const Gameboard = () => {
       _ships[shipObj.name] = shipObj;
       let dx = start[0] - end[0];
       let dy = start[1] - end[1];
-      _board[start[1]][start[0]] = shipObj.name;
       if (dx) {
+        dx = Math.abs(dx) + 1;
         let xMarker = start[0];
         while (dx) {
-          if (dx > 0) {
-            _board[start[1]][xMarker - 1] = shipObj.name;
+          if (start[0] > end[0]) {
+            _board[start[1]][xMarker] = shipObj.name;
             xMarker -= 1;
             dx -= 1;
           } else {
-            _board[start[1]][xMarker + 1] = shipObj.name;
+            _board[start[1]][xMarker] = shipObj.name;
             xMarker += 1
-            dx += 1;
+            dx -= 1;
           }
         }
       } else {
+        dy = Math.abs(dy) + 1;
         let yMarker = start[1];
         while (dy) {
-          if (dy > 0) {
-            _board[yMarker - 1][start[0]] = shipObj.name;
+          if (start[1] > end[1]) {
+            _board[yMarker][start[0]] = shipObj.name;
             yMarker -= 1;
             dy -= 1;
           } else {
-            _board[yMarker + 1][start[0]] = shipObj.name;
+            _board[yMarker][start[0]] = shipObj.name;
             yMarker += 1;
-            dy += 1;
+            dy -= 1;
           }
         }
       }
@@ -82,8 +84,6 @@ const Gameboard = () => {
     }
     return true;
   }
-
-
 
   return {
     _board,

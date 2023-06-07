@@ -2,15 +2,15 @@ const Ship = require('../js/ship');
 const gameboardFns = require('../js/gameboard');
 
 describe('gameboard board is correctly created', () => {
-  test('gameboard length is correctly 11', () => {
+  test('gameboard length is correctly 10', () => {
     const gameboard = gameboardFns.Gameboard();
-    expect(gameboard._board.length).toEqual(11);
+    expect(gameboard._board.length).toEqual(10);
   });
 
   test('gameboard 2nd row is an array and contains items.', () => {
     const gameboard = gameboardFns.Gameboard();
-    expect(gameboard._board[1]).toStrictEqual(['', '', '', '', '', '', '', '', '', '', '']);
-    expect(gameboard._board.length).toEqual(11);
+    expect(gameboard._board[1]).toStrictEqual(['', '', '', '', '', '', '', '', '', '']);
+    expect(gameboard._board.length).toEqual(10);
   });
 });
 
@@ -45,43 +45,43 @@ describe('Gameboard should place ships at specific coordinates by calling the sh
   test('Inserting Ship that goes horizontally on board when going right to left', () => {
     const cruiser = Ship('Cruiser', 4);
     const gameboard = gameboardFns.Gameboard();
-    gameboard.insert(cruiser, [3, 0], [0, 0]);
+    gameboard.insert(cruiser, [9, 0], [6, 0]);
     expect(gameboard._ships).toHaveProperty(cruiser.name, cruiser);
     
-    expect(gameboard._board[0][0]).toBe('Cruiser');
-    expect(gameboard._board[0][1]).toBe('Cruiser');
-    expect(gameboard._board[0][2]).toBe('Cruiser');
-    expect(gameboard._board[0][3]).toBe('Cruiser');
-    expect(gameboard._board[0][4]).toBe('');
-    expect(gameboard._board[1][4]).toBe('');
+    expect(gameboard._board[0][9]).toBe('Cruiser');
+    expect(gameboard._board[0][8]).toBe('Cruiser');
+    expect(gameboard._board[0][7]).toBe('Cruiser');
+    expect(gameboard._board[0][6]).toBe('Cruiser');
+    expect(gameboard._board[0][5]).toBe('');
+    expect(gameboard._board[1][9]).toBe('');
   });
 
   test('Inserting Ship that goes vertically on board when going bottom to top', () => {
     const cruiser = Ship('Cruiser', 4);
     const gameboard = gameboardFns.Gameboard();
-    gameboard.insert(cruiser, [0, 0], [0, 3]);
+    gameboard.insert(cruiser, [0, 4], [0, 1]);
     expect(gameboard._ships).toHaveProperty(cruiser.name, cruiser);
 
-    expect(gameboard._board[0][0]).toBe('Cruiser');
     expect(gameboard._board[1][0]).toBe('Cruiser');
     expect(gameboard._board[2][0]).toBe('Cruiser');
     expect(gameboard._board[3][0]).toBe('Cruiser');
-    expect(gameboard._board[4][0]).toBe('');
+    expect(gameboard._board[4][0]).toBe('Cruiser');
+    expect(gameboard._board[0][0]).toBe('');
+    expect(gameboard._board[5][0]).toBe('');
     expect(gameboard._board[4][1]).toBe('');
   });
 
   test('Inserting Ship that goes vertically on board when going bottom to top', () => {
-    const cruiser = Ship('Cruiser', 4);
+    const cruiser = Ship('Cruiser', 3);
     const gameboard = gameboardFns.Gameboard();
-    gameboard.insert(cruiser, [0, 3], [0, 0]);
+    gameboard.insert(cruiser, [0, 7], [0, 9]);
     expect(gameboard._ships).toHaveProperty(cruiser.name, cruiser);
 
-    expect(gameboard._board[0][0]).toBe('Cruiser');
-    expect(gameboard._board[1][0]).toBe('Cruiser');
-    expect(gameboard._board[2][0]).toBe('Cruiser');
-    expect(gameboard._board[3][0]).toBe('Cruiser');
-    expect(gameboard._board[4][0]).toBe('');
-    expect(gameboard._board[4][1]).toBe('');
+    expect(gameboard._board[7][0]).toBe('Cruiser');
+    expect(gameboard._board[8][0]).toBe('Cruiser');
+    expect(gameboard._board[9][0]).toBe('Cruiser');
+    expect(gameboard._board[6][0]).toBe('');
+    expect(gameboard._board[8][1]).toBe('');
   });
 
   test('Inserting ship at area where another ship is inserted should result in no insertion', () => {

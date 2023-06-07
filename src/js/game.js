@@ -16,11 +16,6 @@ const Ship = require('./ship.js');
       // We want to add to the miss array
     // Change the currentTurn to the opponents turn
     // Update the HTML Dom to signify that it is the opponents turn
-    
-
-
-
-
 const Game = () => {
   const _players = {};
   let _currentTurn = _players[1];
@@ -101,10 +96,4 @@ const createRandomBoard = () => {
   }
 }
 */
-
-const newGame = Game();
-newGame.createPlayer('Justin');
-newGame.createPlayer('Jeff');
-console.log(newGame);
-
 module.exports = Game;
