@@ -33,8 +33,6 @@ const setInsertShipListener = (game) => {
     const currentShip = divInsert.getAttribute('data-ship');
     // 'A4 A5' --> [A4, A5] || [[0, 4], [0, 5]];
     const coordinates = transformInputToCoord(input.value);
-    console.log(coordinates);
-
     if (currentPlayer.board.validateInsert(coordinates[0], coordinates[1])) {      
       if (currentShip === 'cruiser' && game.checkInsertParameters(3, coordinates[0], coordinates[1])) {
         const ship = Ship('Cruiser', 3);
@@ -83,8 +81,6 @@ const transformInputToCoord = (inputVal) => {
     return ele === arr[1][0];
   });
 
-  console.log(parseInt(arr[0].slice(1)), parseInt(arr[1].slice(1)));
-
   return [[idxStart, parseInt(arr[0].slice(1)) - 1], [idxEnd, parseInt(arr[1].slice(1)) - 1]];
 }
 
@@ -115,7 +111,6 @@ const insertShip = () => {
 
 const displayGameBoard = (playerNumber, playerBoard) => {
   const rowListItems = document.querySelectorAll(`div.board[data-player="${playerNumber}"] > ul > li`);
-  console.log(rowListItems);
 
   for (let i = 0; i < playerBoard.length; i++) {
     const boardRow = playerBoard[i];

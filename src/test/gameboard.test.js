@@ -14,6 +14,24 @@ describe('gameboard board is correctly created', () => {
   });
 });
 
+describe ('validateInsert should check that a start and end coordinates does not interfere with ships already placed on board', () => {
+  test('If there is a ship already placed at B1, then parameters A1 to C1 should throw error', () => {
+    const gameboard = gameboardFns.Gameboard();
+    const cruiser = Ship('Cruiser', 3);
+    gameboard.insert(cruiser, [0, 0], [2, 0]);
+    // const destroyer = Ship('Destroyer', 2);
+    expect(gameboard.validateInsert([1, 0], [1, 1])).toBeFalsy();
+  });
+
+  test('If there is are no ships placed between the two parameters, then parameters A1 to C1 should return tru', () => {
+    const gameboard = gameboardFns.Gameboard();
+    const cruiser = Ship('Cruiser', 3);
+    gameboard.insert(cruiser, [0, 0], [2, 0]);
+
+    // const destroyer = Ship('Destroyer', 2);
+    expect(gameboard.validateInsert([1, 1], [1, 2])).toBeTruthy();
+  });
+});
 // Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
 describe('checkInsertParameters should check to see if start and end coordinates accurately match shipLength', () => {
   test('If start and end accurately match shipLength, return truthy', () => {
@@ -88,7 +106,7 @@ describe('Gameboard should place ships at specific coordinates by calling the sh
     const cruiser = Ship('Cruiser', 3);
     const gameboard = gameboardFns.Gameboard();
     gameboard.insert(cruiser, [0, 2], [0, 0]);
-    expect(() => gameboard.validateInsert([0, 2], [0, 5])).toThrow('Invalid Insert');
+    expect(gameboard.validateInsert([0, 2], [0, 5])).toBeFalsy();
   });
 });
 

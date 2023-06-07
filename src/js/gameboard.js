@@ -3,22 +3,35 @@ const Gameboard = () => {
   const _ships = {};
   const _missedAttacks = [];
 
-  // incorrect.
+  // validateInsert function
+  // Given a start and end parameter
+  // Going from the start to the end marker
   function validateInsert(start, end) {
+    const dx = start[0] - end[0];
+    const dy = start[1] - end[1];
+
     let marker = start;
-    if (start[0] === 0) {
-      while (marker[1] !== end[1]) {
-        if (_board[marker[1]][marker[0]] !== '') {
-          throw new Error('Invalid Insert');
-        }
-        marker = [start[0], marker[1] + 1];
-      }
-    } else {
+    if (dx) {
       while (marker[0] !== end[0]) {
         if (_board[marker[1]][marker[0]] !== '') {
-          throw new Error('Invalid Insert');
+          return false;
         }
-        marker = [marker[0] + 1, start[1]];
+        if (dx < 0) {
+          marker = [marker[0] + 1, start[1]];
+        } else {
+          marker = [marker[0] - 1, start[1]];
+        }
+      }
+    } else {
+      while (marker[1] !== end[1]) {
+        if (_board[marker[1]][marker[0]] !== '') {
+          return false;
+        }
+        if (dy < 0) {
+          marker = [start[0], marker[1] + 1];
+        } else {
+          marker = [start[0], marker[1] - 1];
+        }
       }
     }
     return true;
