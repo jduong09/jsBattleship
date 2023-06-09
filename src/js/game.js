@@ -18,7 +18,7 @@ const Ship = require('./ship.js');
     // Update the HTML Dom to signify that it is the opponents turn
 const Game = () => {
   const _players = {};
-  let _currentTurn = _players[1];
+  let _currentTurn = 1;
 
   function createPlayer(playerName) {
     const playerNumber = _players[1] ? 2 : 1;
@@ -27,22 +27,26 @@ const Game = () => {
       name: playerName,
       board: gameboardFns.Gameboard()
     }
-   
-    /*
-    const cruiser = Ship('Cruiser', 3);
-    const destroyer = Ship('Destroyer', 2);
-    _players[playerNumber].board.insert(cruiser, [0, 0], [0, 2]);
-    _players[playerNumber].board.insert(destroyer, [1, 0], [2, 0]);
-    */
 
     return _players[playerNumber];
   }
 
-  function setPlayerBoard(playerNumber) {
-    const ships = [['Battleship', 4], ['Cruiser', 3]];
-    for (let i = 0; i < ships.length; i++) {
+  function getCurrentPlayer() {
+    return _currentTurn;
+  }
 
+  function validateCoordinate(coord) {
+    // ValidateCoordinate will check to make sure the coordinates are in the range 0 and 9.
+    if (coord[0] < 0 || coord[0] > 9 || coord[1] < 0 || coord[1] > 9) {
+      return false;
     }
+    // Check to make sure that the currentPlayers board does not have that as a Missed coordinate or hit coordinate.
+    const opponentGameboard = _currentTurn === 1 ? _players[2].board : _players[1].board;
+    if (!opponentGameboard.checkForDuplicates(coord)) {
+      return false;
+    }
+    
+    return true;
   }
 
   function checkInsertParameters(shipLength, start, end) {
@@ -72,6 +76,8 @@ const Game = () => {
   return {
     _players,
     createPlayer,
+    getCurrentPlayer,
+    validateCoordinate,
     checkInsertParameters
   };
 }

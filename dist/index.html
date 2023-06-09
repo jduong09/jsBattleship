@@ -309,15 +309,17 @@
       <h2 id="game-message">Preparation Phase</h2>
       <form id="form-insert-ships">
         <div id="div-insert" data-ship="cruiser">Player 1, choose where to place your cruiser (Length: 3 places):</div>
-        <label>Coordinates:</label>
-        <input type="text" id="insert-coordinates" placeholder="ex: A4 A6, B3 B6" />
+        <label for="insert-coordinates">Coordinates:</label>
+        <input type="text" id="insert-coordinates" minlength="5" maxlength="7" pattern="^[A-Z]([1-9]|10)\s[A-Z]([1-9]|10)$" placeholder="ex: A4 A6, B3 B6" required/>
         <span id="span-insert-error" class="span-input-error hide"></span>
         <input type="submit" id="insert-submit" value="Submit Coordinates" />
       </form>
       <form id="form-atk-coords" class="hide">
-        <label for="coord"></label>
-        <input type="text" id="coord" placeholder="ex: A4" />
-        <input type="submit" id="submit" value="Submit Coordinates" />
+        <div id="div-atk" data-ship="cruiser">Player 1, choose where to place your cruiser (Length: 3 places):</div>
+        <label for="coord">Coordinates</label>
+        <input type="text" id="coord" minlength="2" maxlength="2" pattern="^[A-Z]([1-9]|10)" placeholder="ex: A4" />
+        <span id="span-coord-error" class="span-input-error hide"></span>
+        <input type="submit" id="atk-submit" value="Submit Coordinates" />
       </form>
     </div>
   </main>
