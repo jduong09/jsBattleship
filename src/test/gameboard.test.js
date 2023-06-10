@@ -33,6 +33,7 @@ describe ('validateInsert should check that a start and end coordinates does not
   });
 });
 // Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
+/*
 describe('checkInsertParameters should check to see if start and end coordinates accurately match shipLength', () => {
   test('If start and end accurately match shipLength, return truthy', () => {
     expect(gameboardFns.checkInsertParameters(4, [0, 0], [3, 0])).toBeTruthy();
@@ -43,7 +44,7 @@ describe('checkInsertParameters should check to see if start and end coordinates
     expect(gameboardFns.checkInsertParameters(3, [0, 0], [4, 0])).toBeFalsy();
   });
 });
-
+*/
 describe('Gameboard should place ships at specific coordinates by calling the ship factory function', () => {
   test('Inserting Ship that goes horizontally on board when going left to right', () => {
     const cruiser = Ship('Cruiser', 4);
@@ -161,4 +162,17 @@ test('Gameboard should be able to report whether or not all of the ships have be
   gameboard.receiveAttack([5, 0]);
 
   expect(gameboard.gameOver).toBeTruthy();
+});
+
+describe('Gameboard should be able to report whether or not a coordinate has been chosen already', () => {
+  const gameboard = gameboardFns.Gameboard();
+  gameboard.receiveAttack([0, 0]);
+
+  test('checkForDuplicates returns true if coordinates matches a coordinate in missed array already', () => {
+    expect(gameboard.checkForDuplicates([0, 0])).toBeTruthy();
+  });
+
+  test('checkForDuplicates returns false if coordinates does not match a coordinate in missedArray', () => {
+    expect(gameboard.checkForDuplicates([3, 0])).toBeFalsy();
+  });
 });

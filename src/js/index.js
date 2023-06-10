@@ -63,16 +63,34 @@ const setBattleSubmitBtnListener = (game) => {
   const currentPlayer = game.getCurrentPlayer();
   const inputCoord = document.getElementById('coord');
   const inputSubmit = document.getElementById('atk-submit');
+  const spanError = document.getElementById('span-coord-error');
 
-  inputSubmit.addEventListener('click', () => {
+  inputSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
     const coordinate = transformInputToCoord(inputCoord.value);
     // Given an input, we need to validate that it is a valid coordinate.
     if (game.validateCoordinate(coordinate)) {
+      if (!spanError.classList.contains('hide')) {
+        spanError.classList.add('hide');
+      }
+
       game.turn(coordinate);
+      game.swapTurns();
     } else {
-      // return error for why coordinates fail.
+      displayAtkErrorMessage(coordinate);
     }
   });
+}
+
+const displayAtkErrorMessage = (coord) => {
+  const spanError = document.getElementById('span-coord-error');
+
+  if (coord[0] < 0 || coord[0] > 10 || coord[1] < 0 || coord[1] > 10) {
+    spanError.innerHTML = 'Input is out of range. Try again.';
+  } else {
+    spanError.innerHTML = 'Input has been chosen already. Try again.';
+  }
+  spanError.classList.remove('hide');
 }
 
 const setPrepHeader = (game) => {
@@ -218,7 +236,6 @@ const displayInputError = (input) => {
   }
 }
 
-// A5
 const transformInputToCoord = (inputVal) => {
   const alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K'];
   
@@ -230,6 +247,7 @@ const transformInputToCoord = (inputVal) => {
 }
 
 const displayGameBoard = (playerNumber, playerBoard) => {
+  const board = document.querySelector(`div.board[data-player="${playerNumber}"]`);
   const rowListItems = document.querySelectorAll(`div.board[data-player="${playerNumber}"] > ul > li`);
 
   for (let i = 0; i < playerBoard.length; i++) {
@@ -245,6 +263,8 @@ const displayGameBoard = (playerNumber, playerBoard) => {
       }
     }
   }
+
+  board.classList.remove('hide');
 }
 
 const hideGameBoard = (playerNumber) => {
@@ -263,6 +283,6 @@ const hideGameBoard = (playerNumber) => {
 const setBattleHeader = (game) => {
   const divAtk = document.getElementById('div-atk');
   const currentPlayer = game.getCurrentPlayer();
-
-  divAtk.innerHTML = `${game._players[currentPlayer]}, where would you like to attack?`;
+  displayGameBoard(currentPlayer, game._players[currentPlayer].board._board);
+  divAtk.innerHTML = `${game._players[currentPlayer].name}, where would you like to attack?`;
 }

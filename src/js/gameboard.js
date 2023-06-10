@@ -9,7 +9,6 @@ const Gameboard = () => {
   function validateInsert(start, end) {
     const dx = start[0] - end[0];
     const dy = start[1] - end[1];
-
     let marker = start;
     if (dx) {
       while (marker[0] !== end[0]) {
@@ -39,55 +38,64 @@ const Gameboard = () => {
 
   function insert(shipObj, start, end) {
     let shipLength = shipObj.shipLength;
-    if (checkInsertParameters(shipLength, start, end)) {
-      _ships[shipObj.name] = shipObj;
-      let dx = start[0] - end[0];
-      let dy = start[1] - end[1];
-      if (dx) {
-        dx = Math.abs(dx) + 1;
-        let xMarker = start[0];
-        while (dx) {
-          if (start[0] > end[0]) {
-            _board[start[1]][xMarker] = shipObj.name;
-            xMarker -= 1;
-            dx -= 1;
-          } else {
-            _board[start[1]][xMarker] = shipObj.name;
-            xMarker += 1
-            dx -= 1;
-          }
-        }
-      } else {
-        dy = Math.abs(dy) + 1;
-        let yMarker = start[1];
-        while (dy) {
-          if (start[1] > end[1]) {
-            _board[yMarker][start[0]] = shipObj.name;
-            yMarker -= 1;
-            dy -= 1;
-          } else {
-            _board[yMarker][start[0]] = shipObj.name;
-            yMarker += 1;
-            dy -= 1;
-          }
+    _ships[shipObj.name] = shipObj;
+    let dx = start[0] - end[0];
+    let dy = start[1] - end[1];
+    if (dx) {
+      dx = Math.abs(dx) + 1;
+      let xMarker = start[0];
+      while (dx) {
+        if (start[0] > end[0]) {
+          _board[start[1]][xMarker] = shipObj.name;
+          xMarker -= 1;
+          dx -= 1;
+        } else {
+          _board[start[1]][xMarker] = shipObj.name;
+          xMarker += 1
+          dx -= 1;
         }
       }
-    return _board;
     } else {
-    // Else we return a incorrect message?
+      dy = Math.abs(dy) + 1;
+      let yMarker = start[1];
+      while (dy) {
+        if (start[1] > end[1]) {
+          _board[yMarker][start[0]] = shipObj.name;
+          yMarker -= 1;
+          dy -= 1;
+        } else {
+          _board[yMarker][start[0]] = shipObj.name;
+          yMarker += 1;
+          dy -= 1;
+        }
+      }
     }
+    return _board;
   }
 
   function receiveAttack(coord) {
     const boardlocation = _board[coord[1]][coord[0]];
-    if (boardlocation) {
+    if (boardlocation !== '') {
       const ship = _ships[boardlocation];
       ship.hit();
-      return 'Shit Hit';
+
+      if (ship.isSunk()) {
+        return `${ship.name} sunk!`;
+      }
+      _board[coord[1]][coord[0]] = 'H';
+      return 'hit';
     } else {
       _missedAttacks.push(coord);
+      _board[coord[1]][coord[0]] = 'M';
       return coord;
     }
+  }
+
+  function checkForDuplicates(coord) {
+    const dupes = _missedAttacks.filter((ele) => {
+      return ele[0] === coord[0] && ele[1] === coord[1];
+    });
+    return dupes.length ? true : false;
   }
 
   function gameOver() {
@@ -105,10 +113,12 @@ const Gameboard = () => {
     validateInsert,
     insert,
     receiveAttack,
+    checkForDuplicates,
     gameOver
   }
 }
 
+/*
 const checkInsertParameters =(shipLength, start, end) => {
   let dx;
   let dy;
@@ -132,8 +142,8 @@ const checkInsertParameters =(shipLength, start, end) => {
     return (dx === 0) ? true : false; 
   }
 }
+*/
 
 module.exports = {
-  checkInsertParameters,
   Gameboard
 };

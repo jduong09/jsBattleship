@@ -42,10 +42,10 @@ const Game = () => {
     }
     // Check to make sure that the currentPlayers board does not have that as a Missed coordinate or hit coordinate.
     const opponentGameboard = _currentTurn === 1 ? _players[2].board : _players[1].board;
-    if (!opponentGameboard.checkForDuplicates(coord)) {
+    // If opponent board has duplicates, return false.
+    if (opponentGameboard.checkForDuplicates(coord)) {
       return false;
     }
-    
     return true;
   }
 
@@ -73,12 +73,24 @@ const Game = () => {
     }
   }
 
+  function turn(coord) {
+    const opponentGameboard = _currentTurn === 1 ? _players[2].board : _players[1].board;
+    const atk = opponentGameboard.receiveAttack(coord);
+    return atk;
+  }
+
+  function swapTurns() {
+    _currentTurn = _currentTurn === 1 ? 2 : 1;
+  }
+
   return {
     _players,
     createPlayer,
     getCurrentPlayer,
     validateCoordinate,
-    checkInsertParameters
+    checkInsertParameters,
+    turn,
+    swapTurns
   };
 }
 
