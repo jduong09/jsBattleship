@@ -78,12 +78,14 @@ const Gameboard = () => {
     if (boardlocation !== '') {
       const ship = _ships[boardlocation];
       ship.hit();
+      
+      _board[coord[1]][coord[0]] = 'H';
 
       if (ship.isSunk()) {
         return `${ship.name} sunk!`;
+      } else {
+        return `${ship.name} hit!`;
       }
-      _board[coord[1]][coord[0]] = 'H';
-      return 'hit';
     } else {
       _missedAttacks.push(coord);
       _board[coord[1]][coord[0]] = 'M';

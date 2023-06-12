@@ -2,8 +2,34 @@
   display: none !important;
 }
 
+header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#game-phase {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.boards {
+  display: flex;
+  justify-content: space-around;
+}
+
 .board {
   padding: 1rem;
+}
+
+.board > h3 {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: .5rem;
 }
 
 .row {
@@ -33,3 +59,13 @@
   color: red;
   font-size: .85rem;
 }
+
+#div-forms {
+  text-align: center;
+}
+
+#game-message {
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+

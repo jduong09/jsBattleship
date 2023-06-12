@@ -74,8 +74,11 @@ const Game = () => {
   }
 
   function turn(coord) {
+    // Given a coordinate, we check to see if the opponent gameboard will get hit or a miss.
     const opponentGameboard = _currentTurn === 1 ? _players[2].board : _players[1].board;
     const atk = opponentGameboard.receiveAttack(coord);
+    // if atk is type object, then the gameboard returned a miss.
+    // update game message to state that it was a miss.
     return atk;
   }
 
