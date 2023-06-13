@@ -3,7 +3,6 @@ const Ship = require('./ship');
 
 document.addEventListener('DOMContentLoaded', () => {
   const game = Game();
-
   game.createPlayer('Justin');
   game.createPlayer('Jeff');
   setPlayerBoardNames(game);
@@ -122,7 +121,7 @@ const setPrepSubmitBtnListener = (game) => {
               divInsert.setAttribute('data-ship', 'cruiser');
               divInsert.innerHTML = `${currentPlayer.name}, choose where to place your cruiser (Length: 3 places):`;
               input.value = null;
-            }, 2500);
+            }, 2000);
           } else {
             displayGameBoard(2, game._players['2'].board._board);
 
@@ -132,7 +131,7 @@ const setPrepSubmitBtnListener = (game) => {
               formInsert.classList.add('hide');
               formBattle.classList.remove('hide');
               setBattleHeader(game);
-            }, 2500);
+            }, 2000);
           }
         } else {
           spanError.innerHTML = 'Error: Different Ship placed at coordinates. Use different coordinates.';
@@ -165,36 +164,28 @@ const setBattleSubmitBtnListener = (game) => {
 
   inputSubmit.addEventListener('click', (e) => {
     e.preventDefault();
+    inputCoord.disabled = true;
     const coordinate = transformInputToCoord(inputCoord.value);
     // Given an input, we need to validate that it is a valid coordinate.
     if (game.validateCoordinate(coordinate)) {
       if (!spanError.classList.contains('hide')) {
         spanError.classList.add('hide');
       }
-
-      // Once turn is validated, we run through the turn functions
-      // We call turn with coordinate to check if it is a hit or miss.
-      // Update opponents gameboard.
       const turn = game.turn(coordinate);
-      // Update game message to either hit or miss
-      // Display opponents gameboard to illustrate hit or miss
-      // Hide gameboard after 2.5seconds.
-      // NEED TO ADD GAME OVER CHECK AND GAME OVER MESSAGE.
-      displayTurnResult(turn, game);
-      
-      // After 5 seconds
-      // Change turns
-      // Update Game message to battle phase
-      // End of function, we want for input to be selected on turn.
-      setTimeout(() => {
-        // Change game phase current turn.
-        game.swapTurns();
-        // Show current players game board, with hits and misses and ships.
-        // show opponents gameboard, with hits and misses but no ships.
-        updateTurnPhase(game);
-      }, 5000)
+      if (turn === 'Game Over!') {
+        displayGameOver(game);
+      } else {
+        displayTurnResult(turn, game);
+        setTimeout(() => {
+          // Change game phase current turn.
+          game.swapTurns();
+          inputCoord.disabled = false;
+          updateTurnPhase(game);
+        }, 3000);
+      }
     } else {
       displayAtkErrorMessage(coordinate);
+      inputCoord.disabled = false;
     }
   });
 }
@@ -268,7 +259,6 @@ const displayGameBoard = (playerNumber, playerBoard) => {
       }
     }
   }
-
   board.classList.remove('hide');
 }
 
@@ -365,7 +355,7 @@ const displayTurnResult = (turn, game) => {
   // After 2.5 seconds hide the opponents game board.
   setTimeout(() => {
     hideGameBoard(oppositePlayer);
-  }, 2500);
+  }, 2000);
 }
 
 const updateTurnPhase = (game) => {
@@ -385,4 +375,14 @@ const updateTurnPhase = (game) => {
   gameMessage.innerHTML = `${game._players[currentPlayer].name}'s Turn`;
   inputCoord.value = '';
   divAtk.innerHTML = `${player.name}, where would you like to attack?`;
+}
+
+const displayGameOver = (game) => {
+  const gameMessage = document.getElementById('game-message');
+  const winner = game._players[game.getCurrentPlayer()];
+  displayGameBoard(1, game._players[1].board._board);
+  displayGameBoard(2, game._players[2].board._board);
+
+  gameMessage.innerHTML = `${winner.name} wins!`;
+  // unhide play again button? 
 }

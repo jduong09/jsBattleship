@@ -103,7 +103,7 @@ const Gameboard = () => {
   function gameOver() {
     for (const shipName in _ships) {
       const ship = _ships[shipName];
-      if (ship.isSunk()) return false;
+      if (!ship.isSunk()) return false;
     }
     return true;
   }

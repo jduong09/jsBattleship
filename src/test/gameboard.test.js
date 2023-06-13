@@ -139,6 +139,14 @@ test('Gameboard should keep track of missed attacks so they can display them pro
   expect(gameboard._missedAttacks).toEqual(expect.arrayContaining(expected));
 });
 
+test('Gameboard should return false for gameOver function if not all of the ships have been sunk', () => {
+  const cruiser = Ship('Cruiser', 4);
+  const gameboard = gameboardFns.Gameboard();
+  gameboard.insert(cruiser, [0, 0], [3, 0]);
+  gameboard.receiveAttack([0, 0]);
+  expect(gameboard.gameOver()).toBeFalsy();
+});
+
 test('Gameboard should be able to report whether or not all of the ships have been sunk', () => {
   const cruiser = Ship('Cruiser', 4);
   const airCarrier = Ship('Air Carrier', 7);
@@ -161,7 +169,7 @@ test('Gameboard should be able to report whether or not all of the ships have be
   gameboard.receiveAttack([6, 0]);
   gameboard.receiveAttack([5, 0]);
 
-  expect(gameboard.gameOver).toBeTruthy();
+  expect(gameboard.gameOver()).toBeTruthy();
 });
 
 describe('Gameboard should be able to report whether or not a coordinate has been chosen already', () => {

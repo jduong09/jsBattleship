@@ -79,6 +79,9 @@ const Game = () => {
     const atk = opponentGameboard.receiveAttack(coord);
     // if atk is type object, then the gameboard returned a miss.
     // update game message to state that it was a miss.
+    if (opponentGameboard.gameOver()) {
+      return 'Game Over!';
+    }
     return atk;
   }
 
@@ -97,24 +100,4 @@ const Game = () => {
   };
 }
 
-/*
-// Carrier (occupies 5 spaces), Battleship (4), Cruiser (3), Submarine (3), and Destroyer (2).
-const createRandomBoard = () => {
-  const gameboard = gameboardFns.Gameboard();
-  const shipArray = [Ship('Destroyer', 2)];
-
-  // Randomly add ships to gameboard.
-  for (let i = 0; i < shipArray.length; i++) {
-    const ship = shipArray[i];
-    // Generate random starting position in between 1 and 11.
-    let randomStart = Math.floor(Math.random() * (11 - 1 + 1) + 1);
-
-    // Generate whether integer will be x or y.
-    const randomDirection = Math.floor(Math.random() * (2 - 1 + 1) + 1);
-    console.log(randomDirection);
-    let shipStart = randomDirection === 1 ? [randomStart, 0] : [0, randomStart];
-    console.log(shipStart);
-  }
-}
-*/
 module.exports = Game;
