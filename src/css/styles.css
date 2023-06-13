@@ -48,10 +48,22 @@ header {
 }
 
 .spot {
-  display: block;
   width: 24px;
   height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: .5px solid black;
+}
+
+.board > .player-legend {
+  margin-top: .5rem;
+}
+
+.board > .player-legend > ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .span-input-error {
