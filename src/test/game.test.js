@@ -50,7 +50,9 @@ describe('turn will take in a pair of coordinates, and check for hits and misses
 
   test ('If coordinates sink a ship, return ship sunk message', () => {
     const ship = Ship('Destroyer', 2);
+    const cruiser = Ship('Cruiser', 3);
     game._players[2].board.insert(ship, [0, 0], [0, 1]);
+    game._players[2].board.insert(cruiser, [5, 0], [7, 0]);
     expect(game.turn([0, 0])).toBe('Destroyer hit!');
     expect(game.turn([0, 1])).toBe('Destroyer sunk!');
   });

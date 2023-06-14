@@ -96,7 +96,7 @@ const Game = () => {
     validateCoordinate,
     checkInsertParameters,
     turn,
-    swapTurns
+    swapTurns,
   };
 }
 

@@ -75,6 +75,7 @@ const Gameboard = () => {
 
   function receiveAttack(coord) {
     const boardlocation = _board[coord[1]][coord[0]];
+
     if (boardlocation !== '') {
       const ship = _ships[boardlocation];
       ship.hit();
@@ -94,6 +95,11 @@ const Gameboard = () => {
   }
 
   function checkForDuplicates(coord) {
+    const boardLocation = _board[coord[1]][coord[0]];
+    if (boardLocation === 'H') {
+      return true;
+    }
+    
     const dupes = _missedAttacks.filter((ele) => {
       return ele[0] === coord[0] && ele[1] === coord[1];
     });
@@ -107,7 +113,7 @@ const Gameboard = () => {
     }
     return true;
   }
-
+  
   return {
     _board,
     _ships,

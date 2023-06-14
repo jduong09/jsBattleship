@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startPrepPhase(game);
   startBattlePhase(game);
+  setResetBtnListener(game);
 });
 
 const setPlayerBoardNames = (game) => {
@@ -55,7 +56,6 @@ const setPrepSubmitBtnListener = (game) => {
     const currentShip = divInsert.getAttribute('data-ship');
     const coordinatesArray = input.value.split(' ');
     const coordinates = [transformInputToCoord(coordinatesArray[0]), transformInputToCoord(coordinatesArray[1])];
-    
     if (currentShip === 'cruiser') {
       // The two coordinates match the length of the ship
       if (game.checkInsertParameters(3, coordinates[0], coordinates[1])) {
@@ -203,6 +203,16 @@ const setInputListener = (input, span) => {
   });
 }
 
+const setResetBtnListener = (game) => {
+  const resetBtn = document.getElementById('btn-reset');
+
+  resetBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    location.reload();
+  });
+}
+
 const displayInputError = (input) => {
   const parentElement = input.parentElement;
   const spanErrorElement = parentElement.children[3];
@@ -242,7 +252,7 @@ const displayGameBoard = (playerNumber, playerBoard) => {
 
     for (let j = 0; j < boardRow.length; j++) {
       if (boardRow[j] === '') {
-        continue;
+        spans[j + 1].innerHTML = '';
       } else if (boardRow[j] === 'H') {
         spans[j + 1].innerHTML = 'H';
       } else if (boardRow[j] === 'M') {
@@ -317,7 +327,6 @@ const createGameIcon = (name) => {
   return svg;
 }
 
-
 const setBattleHeader = (game) => {
   const gameMessage = document.getElementById('game-message');
   const divAtk = document.getElementById('div-atk');
@@ -379,10 +388,28 @@ const updateTurnPhase = (game) => {
 
 const displayGameOver = (game) => {
   const gameMessage = document.getElementById('game-message');
+  const formReset = document.getElementById('form-reset');
   const winner = game._players[game.getCurrentPlayer()];
   displayGameBoard(1, game._players[1].board._board);
   displayGameBoard(2, game._players[2].board._board);
 
   gameMessage.innerHTML = `${winner.name} wins!`;
+  formReset.classList.remove('hide');
   // unhide play again button? 
+}
+
+const resetForms = (game) => {
+  const formReset = document.getElementById('form-reset');
+  const formInsert = document.getElementById('form-insert-ships');
+  const formAtk = document.getElementById('form-atk-coords');
+  const divInsert = document.getElementById('div-insert');
+  const gameMessage = document.getElementById('game-message');
+
+  formReset.classList.add('hide');
+  formAtk.classList.add('hide');
+  formInsert.classList.remove('hide');
+
+  divInsert.setAttribute('data-ship', 'cruiser');
+  gameMessage.innerHTML = `${game._players[game.getCurrentPlayer()].name}'s Turn`;
+  divInsert.innerHTML = `${game._players[game.getCurrentPlayer()].name}, choose where to place your cruiser (Length: 3 places):`;
 }
